@@ -1,2 +1,2 @@
-# lab_report_knapsack
+# lab6
 vår sexiga labb 6 Ana och jag är bäst på programmering 
