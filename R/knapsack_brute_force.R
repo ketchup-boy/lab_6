@@ -15,7 +15,7 @@ knapsack_brute_force <- function(x, W){
   return(data.frame(items = current_best_items, weight = current_max_weight))
 }
 
-result <- knapsack_brute_force(knapsack_objects, 8033)
+#result <- knapsack_brute_force(knapsack_objects, 8033)
 
 
 
