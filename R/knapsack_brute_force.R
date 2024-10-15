@@ -49,13 +49,13 @@ knapsack_brute_force_optimized <- function(x, W){
 }
 
 
-library(lineprof)
-#source("profiling-example.R")
-l <- lineprof(knapsack_brute_force(knapsack_objects, 6033))
-l
-
-o <- lineprof(knapsack_brute_force_optimized(knapsack_objects, 6033))
-o
+# library(profvis)
+# #source("profiling-example.R")
+# l <- profvis({knapsack_brute_force(knapsack_objects, 6033)})
+# l
+# 
+# o <- profvis({knapsack_brute_force_optimized(knapsack_objects, 6033)})
+# o
 
 #summaryRprof("prof_brute_force")
 
