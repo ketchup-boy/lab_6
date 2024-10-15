@@ -29,6 +29,13 @@ greedy_knapsack <- function(x, W) {
   return(list(value = total_value, elements = elements))
 }
 
+# Measure the time to run the algorithm using system.time for n <- 1000000 objects
+# user  system elapsed 
+# 0.38    0.13    0.49
+
+
+
+
 # Example usage:
 RNGversion("3.5.3")
 suppressWarnings({
@@ -40,4 +47,21 @@ knapsack_objects <- data.frame(
   v = runif(n = n, 0, 10000)
 )
 
+# Generating 1,000,000 objects
+n <- 1000000
+suppressWarnings({
+set.seed(42, kind = "Mersenne-Twister", normal.kind = "Inversion")
+})
+knapsack_objects_large <- data.frame(
+  w = sample(1:4000, size = n, replace = TRUE),
+  v = runif(n = n, 0, 10000)
+)
+
+# Measure the time to run the algorithm
+system.time({
+  result_large <- greedy_knapsack(knapsack_objects_large, W = 500000)
+})
+
+print(result_large$value)
+print(result_large$elements)
 
