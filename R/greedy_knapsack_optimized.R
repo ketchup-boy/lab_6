@@ -38,9 +38,9 @@ greedy_knapsack_optimized <- function(x, W) {
   return(list(value = total_value, elements = elements[1:count]))  # Only return filled elements
 }
 
-profvis({
-  result_optimized <- greedy_knapsack_optimized_with_sleep(knapsack_objects, W = 500000)
-})
+#profvis({
+ # result_optimized <- greedy_knapsack_optimized_with_sleep(knapsack_objects, W = 500000)
+#})
 
 
 #Question: What performance gain could you get by trying to improving your code?
