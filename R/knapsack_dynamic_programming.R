@@ -19,14 +19,9 @@
 
 knapsack_dynamic_programming <- function(x, W) {
   stopifnot("v" %in% names(x) & "w" %in% names(x) & all(x$v > 0) & all(x$w > 0))
-  
-  # Number of items
   n <- nrow(x)
-  
-  # Create a matrix to store the maximum value at each weight from 0 to W
   dp <- matrix(0, nrow = n + 1, ncol = W + 1)
   
-  # Fill the dp table
   for (i in 1:n) {
     for (w in 0:W) {
       if (x$w[i] <= w) {
@@ -37,10 +32,8 @@ knapsack_dynamic_programming <- function(x, W) {
     }
   }
   
-  # The maximum value that can be carried in the knapsack of weight W
   max_value <- dp[n + 1, W + 1]
   
-  # To find which items were selected, we can trace back from dp[n+1, W+1]
   selected_items <- c()
   remaining_capacity <- W
   for (i in n:1) {
@@ -50,7 +43,6 @@ knapsack_dynamic_programming <- function(x, W) {
     }
   }
   
-  # Return result as a list containing the max value and the selected items
   return(list(max_value = max_value, selected_items = selected_items))
 }
 
