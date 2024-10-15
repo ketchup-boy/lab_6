@@ -4,7 +4,7 @@
 #Optimized versions of "greedy_knapsack":
 
 
-#OPIMIZATION 1: Preallocate Vectors:
+#OPIMIZATION: Preallocate Vectors:
 greedy_knapsack_optimized <- function(x, W) {
   # Add a column to keep track of original indices
   x$original_index <- 1:nrow(x)
@@ -38,3 +38,5 @@ greedy_knapsack_optimized <- function(x, W) {
   return(list(value = total_value, elements = elements[1:count]))  # Only return filled elements
 }
 
+#Question: What performance gain could you get by trying to improving your code?
+  # the optimized function lowered the execution time - function became vary fast
