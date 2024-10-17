@@ -18,15 +18,25 @@ brute_force_knapsack <- function(x, W){
   return(list(value = current_best_value, elements = current_best_items, weight = current_max_weight))
 }
 
- library(profvis)
- l <- profvis({brute_force_knapsack(knapsack_objects, 4033)})
- l
+RNGversion(min(as.character(getRversion()),"3.5.3"))
 
- o <- profvis({brute_force_knapsack_optimized(knapsack_objects, 4033)})
- o
+set.seed(42, kind = "Mersenne-Twister", normal.kind = "Inversion")
+n <- 16
+knapsack_objects <-
+  data.frame(
+    w=sample(1:4000, size = n, replace = TRUE),
+    v=runif(n = n, 0, 10000)
+  )
+# 
+#  library(profvis)
+#  l <- profvis({brute_force_knapsack(knapsack_objects, 4033)})
+#  l
 
-#res <- brute_force_knapsack_optimized(knapsack_objects, 2033)
-#res_opt <- brute_force_knapsack_optimized(knapsack_objects, 2033)
+system.time({
+   result <- brute_force_knapsack(knapsack_objects, 3300)
+})
 
-#summaryRprof("prof_brute_force")
-
+system.time({
+  result_parallel <- brute_force_knapsack_general(knapsack_objects, 3000, TRUE)
+})
+ #result <- brute_force_knapsack(knapsack_objects, 3000)

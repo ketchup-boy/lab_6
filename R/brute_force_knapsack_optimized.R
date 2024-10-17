@@ -24,3 +24,21 @@ brute_force_knapsack_optimized <- function(x, W){
   }
   return(list(value = current_best_value, elements = current_best_items, weight = current_max_weight))
 }
+
+RNGversion(min(as.character(getRversion()),"3.5.3"))
+
+set.seed(42, kind = "Mersenne-Twister", normal.kind = "Inversion")
+n <- 16
+knapsack_objects <-
+  data.frame(
+    w=sample(1:4000, size = n, replace = TRUE),
+    v=runif(n = n, 0, 10000)
+  )
+
+system.time({
+  result_optimized <- brute_force_knapsack_optimized(knapsack_objects, 3300)
+})
+
+o <- profvis({brute_force_knapsack_optimized(knapsack_objects, 4033)})
+o
+
