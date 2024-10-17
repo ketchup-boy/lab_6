@@ -48,3 +48,4 @@ brute_force_knapsack_general <- function(x, W, parallel){
 }
 
 result_parallel <- brute_force_knapsack_parallel(knapsack_objects, 3000)
+

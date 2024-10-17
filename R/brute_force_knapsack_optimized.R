@@ -35,10 +35,10 @@ knapsack_objects <-
     v=runif(n = n, 0, 10000)
   )
 
-system.time({
-  result_optimized <- brute_force_knapsack_optimized(knapsack_objects, 3300)
-})
+#system.time({
+ # result_optimized <- brute_force_knapsack_optimized(knapsack_objects, 3300)
+#})
 
-o <- profvis({brute_force_knapsack_optimized(knapsack_objects, 4033)})
-o
+#o <- profvis({brute_force_knapsack_optimized(knapsack_objects, 4033)})
+#o
 

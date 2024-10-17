@@ -1,7 +1,6 @@
 brute_force_knapsack <- function(x, W){
-  stopifnot("v" %in% names(x) & "w" %in% names(x) & all(x$v > 0) & all(x$w > 0))
+  stopifnot("v" %in% names(x) & "w" %in% names(x) & all(x$v > 0) & all(x$w > 0) & (W >= 0))
   n <- length(x$v)
-  current_max_weight <- 0
   current_best_items <- 0
   current_best_value <- 0
   for(i in 1:(2^n)-1){
@@ -12,10 +11,9 @@ brute_force_knapsack <- function(x, W){
     if((current_weight <= W) & (current_value > current_best_value)){
         current_best_value <- current_value
         current_best_items <- indexes
-        current_max_weight <- current_weight
     }
   }
-  return(list(value = current_best_value, elements = current_best_items, weight = current_max_weight))
+  return(list(value = current_best_value, elements = current_best_items))
 }
 
 RNGversion(min(as.character(getRversion()),"3.5.3"))
@@ -32,11 +30,11 @@ knapsack_objects <-
 #  l <- profvis({brute_force_knapsack(knapsack_objects, 4033)})
 #  l
 
-system.time({
-   result <- brute_force_knapsack(knapsack_objects, 3300)
-})
+#system.time({
+ #  result <- brute_force_knapsack(knapsack_objects, 3300)
+#})
 
-system.time({
-  result_parallel <- brute_force_knapsack_general(knapsack_objects, 3000, TRUE)
-})
+#system.time({
+ # result_parallel <- brute_force_knapsack_general(knapsack_objects, 3000, TRUE)
+#})
  #result <- brute_force_knapsack(knapsack_objects, 3000)

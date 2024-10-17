@@ -1,6 +1,6 @@
-
-dynamic_programming_knapsack <- function(x, W) {
+knapsack_dynamic_programming_optimized <- function(x, W) {
   stopifnot("v" %in% names(x) & "w" %in% names(x) & all(x$v > 0) & all(x$w > 0))
+  x <- subset(x, w <= W)
   n <- nrow(x)
   dp <- matrix(0, nrow = n + 1, ncol = W + 1)
   
@@ -38,9 +38,9 @@ knapsack_objects <-
     v=runif(n = n, 0, 10000)
   )
 
-o <- profvis({dynamic_programming_knapsack(knapsack_objects, 4033)})
-o
+#o <- profvis({dynamic_programming_knapsack_optimized(knapsack_objects, 4033)})
+#o
 
-system.time({
-result <- dynamic_programming_knapsack(knapsack_objects, 3300)
-})
+#system.time({
+ # result_optimized <- dynamic_programming_knapsack_optimized(knapsack_objects, 3300)
+#})
