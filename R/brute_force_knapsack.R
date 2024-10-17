@@ -31,7 +31,7 @@ knapsack_objects <-
 #  l
 
 #system.time({
- #  result <- brute_force_knapsack(knapsack_objects, 3300)
+  result_bf <- brute_force_knapsack(knapsack_objects, 3300)
 #})
 
 #system.time({
