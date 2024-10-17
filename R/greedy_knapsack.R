@@ -70,7 +70,7 @@ knapsack_objects_large <- data.frame(
 
 # Measure the time to run the algorithm
 system.time({
-  result_large <- greedy_knapsack(knapsack_objects_large, W = 500000)
+  result_large <- greedy_knapsack(knapsack_objects, W = 2000)
 })
 
 print(result_large$value)
