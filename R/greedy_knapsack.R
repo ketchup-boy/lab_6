@@ -1,4 +1,14 @@
 greedy_knapsack <- function(x, W) {
+  # Check for invalid input: W must be non-negative
+  if (W < 0) {
+    stop("The knapsack capacity must be non-negative")
+  }
+  
+  # Check if x contains the necessary columns 'v' (value) and 'w' (weight)
+  if (!all(c("v", "w") %in% colnames(x))) {
+    stop("Input data must contain 'v' for values and 'w' for weights")
+  }
+  
   # Add a column to keep track of original indices
   x$original_index <- 1:nrow(x)
   
@@ -28,6 +38,7 @@ greedy_knapsack <- function(x, W) {
   # Return a list with the total value and selected elements
   return(list(value = total_value, elements = elements))
 }
+
 
 # Measure the time to run the algorithm using system.time for n <- 1000000 objects
 # user  system elapsed 
