@@ -1,3 +1,15 @@
+#' Dynamic Programming Knapsack Solver (Optimized)
+#'
+#' Solves the knapsack problem using dynamic programming with pruning to optimize memory usage. 
+#' It fills a dynamic programming table and backtracks to find the selected items.
+#'
+#' @param x A data frame containing two columns: v (values) and w (weights).
+#' @param W A numeric value representing the maximum weight capacity of the knapsack.
+#'
+#' @return A list with the following components:
+#'   \item{max_value}{The maximum value that can be obtained.}
+#'   \item{selected_items}{The indices of the selected items that maximize the value.}
+#' @export
 knapsack_dynamic_programming_optimized <- function(x, W) {
   #optimized by pruning just like for brute force
   stopifnot("v" %in% names(x) & "w" %in% names(x) & all(x$v > 0) & all(x$w > 0) & (W >= 0))

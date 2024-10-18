@@ -1,3 +1,16 @@
+#' Brute Force Knapsack Solver (Optimized)
+#'
+#' Solves the knapsack problem using a brute force approach with pruning to exclude items that exceed the capacity.
+#' This version uses binary representation to explore all possible item subsets.
+#'
+#' @param x A data frame containing two columns: v (values) and w (weights).
+#' @param W A numeric value representing the maximum weight capacity of the knapsack.
+#'
+#' @return A list with the following components:
+#'   \item{value}{The maximum value obtained.}
+#'   \item{selected_items}{The indices of the selected items that maximize the value.}
+#'   \item{weight}{The total weight of the selected items.}
+#' @export
 brute_force_knapsack_optimized <- function(x, W){
   stopifnot("v" %in% names(x) & "w" %in% names(x) & all(x$v > 0) & all(x$w > 0))
   #pruning away items that have a weight above the capacity mainly works 

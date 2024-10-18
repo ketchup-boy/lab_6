@@ -31,7 +31,7 @@ brute_force_knapsack <- function(x, W){
 RNGversion(min(as.character(getRversion()),"3.5.3"))
 
 set.seed(42, kind = "Mersenne-Twister", normal.kind = "Inversion")
-n <- 16
+n <- 18
 knapsack_objects <-
   data.frame(
     w=sample(1:4000, size = n, replace = TRUE),
@@ -42,11 +42,11 @@ knapsack_objects <-
 #  l <- profvis({brute_force_knapsack(knapsack_objects, 4033)})
 #  l
 
-#system.time({
- #  result <- brute_force_knapsack(knapsack_objects, 3300)
-#})
+system.time({
+ result <- brute_force_knapsack_general(knapsack_objects, 3300, FALSE)
+})
 
-#system.time({
- # result_parallel <- brute_force_knapsack_general(knapsack_objects, 3000, TRUE)
-#})
+system.time({
+result_parallel <- brute_force_knapsack_general(knapsack_objects, 3000, TRUE)
+})
  #result <- brute_force_knapsack(knapsack_objects, 3000)

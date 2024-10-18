@@ -1,9 +1,15 @@
-
-
-
-#Optimized versions of "greedy_knapsack":
-
-
+' Greedy Knapsack Solver (Optimized)
+#'
+#' Uses a greedy algorithm to solve the knapsack problem by selecting items based on the highest value-to-weight ratio.
+#' This is an approximation and may not always yield the optimal solution.
+#'
+#' @param x A data frame containing two columns: v (values) and w (weights).
+#' @param W A numeric value representing the maximum weight capacity of the knapsack.
+#'
+#' @return A list with the following components:
+#'   \item{value}{The total value of the selected items.}
+#'   \item{elements}{The indices of the selected items that maximize the value.}
+#' @export
 #OPIMIZATION: Preallocate Vectors:
 greedy_knapsack_optimized <- function(x, W) {
   # Add a column to keep track of original indices
