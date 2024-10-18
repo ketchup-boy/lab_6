@@ -38,7 +38,7 @@ The objective is to maximize the total value of the selected items such that the
 
 ### Example Usage:
 
-```{r}
+```{r setup}
 # Generate random items
 set.seed(42)
 n <- 2000
@@ -49,7 +49,7 @@ knapsack_objects <- data.frame(
 ```
 
 ## Solve using the brute force method
-```{r}
+```{r brute force}
 
 result <- brute_force_knapsack(knapsack_objects[1:8,], W = 3500)
 print(result$max_value)
@@ -57,7 +57,7 @@ print(result$selected_items)
 ```
 
 ## Solve using dynamic programming
-```{r}
+```{r dynamic}
 
 result <- knapsack_dynamic_programming(knapsack_objects[1:500,], W = 3500)
 print(result$max_value)
@@ -65,7 +65,7 @@ print(result$selected_items)
 ```
 
 ## Solve using the greedy method
-```{r}
+```{r greedy}
 
 result <- greedy_knapsack(knapsack_objects[1:1200,], W = 3500)
 print(result$value)
@@ -73,7 +73,7 @@ print(result$elements)
 ```
 
 ## Solve using the optimized brute force method
-```{r}
+```{r brute force opt}
 
 result <- brute_force_knapsack_optimized(knapsack_objects[1:8,], W = 3500)
 print(result$max_value)
@@ -82,7 +82,7 @@ print(result$selected_items)
 
 
 ## Solve using optimized dynamic programming method
-```{r}
+```{r dynamic opt}
 
 result <- knapsack_dynamic_programming_optimized(knapsack_objects[1:500,], W = 3500)
 print(result$max_value)
@@ -90,7 +90,7 @@ print(result$selected_items)
 ```
 
 ## Solve using the optimized greedy method
-```{r}
+```{r greedy opt}
 
 result <- greedy_knapsack_optimized(knapsack_objects[1:1200,], W = 3500)
 print(result$value)
@@ -98,7 +98,7 @@ print(result$elements)
 ```
 
 ## Solve using the parallel brute force method
-```{r}
+```{r brute porce par}
 
 result <- brute_force_knapsack_general(knapsack_objects[1:8,], W = 3500, TRUE)
 print(result$max_value)
@@ -111,7 +111,7 @@ brute_force:
 Question: How much time does it takes to run the algorithm for n = 16 objects?
 Answer: 
 
-```{r}
+```{r brute force time}
 system.time({
   result <- brute_force_knapsack(knapsack_objects[1:16,], W = 3500)
 })
@@ -123,7 +123,7 @@ knapsack_dynamic:
 Question: How much time does it takes to run the algorithm for n = 500 objects?
 Answer: 
 
-```{r}
+```{r dynamic time}
 system.time({
   result <- knapsack_dynamic_programming(knapsack_objects[1:500,], W = 3500)
 })
@@ -138,7 +138,7 @@ Question: What performance gain could you get by trying to improving your code?
 
 brute_force_knapsack_optimized: 
 
-```{r setup}
+```{r setup brute force opt vs regular}
 system.time({
 brute_force_knapsack(knapsack_objects[1:16,], 3300)
 })
@@ -152,7 +152,7 @@ The gain can be very large (like exponentially better) when there are items that
 
 knapsack_dynamic_programming_optimized:
 
-```{r setup}
+```{r dynamic opt vs regular}
 system.time({
 knapsack_dynamic_programming(knapsack_objects[1:600,], 3300)
 })
@@ -174,7 +174,7 @@ Parallelize brute force search:
 Question: What performance gain could you get by parallelizing brute force search?
 brute_force_knapsack_parallel:
 
-```{r setup}
+```{r prute force par vs regular}
 system.time({
  result <- brute_force_knapsack_general(knapsack_objects[1:17,], 3300, FALSE)
 })
@@ -187,7 +187,7 @@ result_parallel <- brute_force_knapsack_general(knapsack_objects[1:17,], 3000, T
 It does seem like the parallel runs faster in user time but much slower in elapsed time.
 It is probably due to the overhead computation that comes with parallel computing
 
-```{r setup}
+```{r library}
 library(lab6)
 ```
 
