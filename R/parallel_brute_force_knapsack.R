@@ -19,7 +19,7 @@ library(parallel)
 #' performance, it evaluates chunks of combinations in parallel using the \code{parallel} package. 
 #' Each chunk of combinations is processed separately, and the best combination is selected.
 #'
-#' @export
+#' @export brute_force_knapsack_parallel
 
 brute_force_knapsack_parallel <- function(x, W) {
   stopifnot("v" %in% names(x) & "w" %in% names(x) & all(x$v > 0) & all(x$w > 0))
@@ -74,7 +74,7 @@ brute_force_knapsack_parallel <- function(x, W) {
 #' @details
 #' This function evaluates calls brute_force_knapsack or brute_force_knapsack_optimized depending on boolean input for parameter parallel
 #'
-#' @export
+#' @export brute_force_knapsack_general
 
 brute_force_knapsack_general <- function(x, W, parallel){
   if(parallel){
