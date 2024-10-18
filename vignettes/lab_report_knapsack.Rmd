@@ -1,0 +1,72 @@
+---
+title: "lab_report_knapsack"
+author: "Sofia Danielson and Ana Stanojcic"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{lab_report_knapsack}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+###Introduction
+The **knapsack problem** is a classic optimization problem in which we are given a set of items, each with a weight and a value, and a knapsack with a weight limit. The goal is to determine the combination of items that maximizes the total value without exceeding the weight limit of the knapsack. 
+
+This package includes three different methods for solving the knapsack problem:
+
+1. **Brute Force Approach**: Checks all possible combinations of items to find the best solution.
+2. **Dynamic Programming Approach**: Uses a more efficient algorithm to solve the problem in a way that avoids checking every combination.
+3. **Greedy Approach**: Uses an approximation by choosing items based on their value-to-weight ratio, but does not guarantee the optimal solution.
+
+### Problem Formulation
+
+Given:
+- A set of `n` items, where each item `i` has a value `v[i]` and weight `w[i]`.
+- A knapsack with a maximum weight capacity `W`.
+
+The objective is to maximize the total value of the selected items such that the total weight does not exceed `W`.
+
+### Example Usage:
+
+```{r}
+# Generate random items
+set.seed(42)
+n <- 2000
+knapsack_objects <- data.frame(
+  w = sample(1:4000, size = n, replace = TRUE),
+  v = runif(n = n, 0, 10000)
+)
+```
+
+# Solve using the brute force method
+```{r}
+result <- brute_force_knapsack(knapsack_objects[1:8,], W = 3500)
+print(result$max_value)
+print(result$selected_items)
+```
+
+# Solve using dynamic programming
+```{r}
+result <- knapsack_dynamic_programming(knapsack_objects[1:800,], W = 3500)
+print(result$max_value)
+print(result$selected_items)
+```
+
+```{r}
+# Solve using the greedy method
+result <- greedy_knapsack(knapsack_objects[1:1200,], W = 3500)
+print(result$value)
+print(result$elements)
+```
+
+```{r setup}
+library(lab6)
+```
+
+###Conclusion
+This package offers multiple methods for solving the knapsack problem, from exact solutions to faster approximations. Depending on the problem size and requirements, users can choose the appropriate method to find the optimal or near-optimal solution
