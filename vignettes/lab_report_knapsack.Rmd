@@ -9,6 +9,7 @@ vignette: >
 ---
 
 ```{r, include = FALSE}
+library(lab6)  # Assuming your package is named 'lab6'
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
@@ -43,22 +44,25 @@ knapsack_objects <- data.frame(
 )
 ```
 
-# Solve using the brute force method
+## Solve using the brute force method
 ```{r}
+
 result <- brute_force_knapsack(knapsack_objects[1:8,], W = 3500)
 print(result$max_value)
 print(result$selected_items)
 ```
 
-# Solve using dynamic programming
+## Solve using dynamic programming
 ```{r}
+
 result <- knapsack_dynamic_programming(knapsack_objects[1:800,], W = 3500)
 print(result$max_value)
 print(result$selected_items)
 ```
 
+## Solve using the greedy method
 ```{r}
-# Solve using the greedy method
+
 result <- greedy_knapsack(knapsack_objects[1:1200,], W = 3500)
 print(result$value)
 print(result$elements)

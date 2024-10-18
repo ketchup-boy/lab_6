@@ -1,3 +1,15 @@
+#' Brute Force Knapsack Solver
+#'
+#' Solves the 0/1 knapsack problem using a brute force approach, where every
+#' possible subset of items is checked to determine the optimal selection.
+#'
+#' @param x A data frame containing two columns: `v` (values) and `w` (weights).
+#' @param W A numeric value representing the maximum capacity (weight) of the knapsack.
+#'
+#' @return A list with the following components:
+#'   \item{max_value}{The maximum value that can be obtained.}
+#'   \item{selected_items}{The indices of the items selected to obtain the maximum value.}
+#' @export
 brute_force_knapsack <- function(x, W){
   stopifnot("v" %in% names(x) & "w" %in% names(x) & all(x$v > 0) & all(x$w > 0) & (W >= 0))
   n <- length(x$v)

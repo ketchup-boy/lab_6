@@ -1,3 +1,16 @@
+#' Greedy Approximation Knapsack Solver
+#'
+#' Uses a greedy algorithm to solve the knapsack problem by selecting items with
+#' the highest value-to-weight ratio first. This is an approximation algorithm
+#' and may not always return the optimal solution.
+#'
+#' @param x A data frame containing two columns: `v` (values) and `w` (weights).
+#' @param W A numeric value representing the maximum capacity (weight) of the knapsack.
+#'
+#' @return A list with the following components:
+#'   \item{value}{The total value of the selected items.}
+#'   \item{elements}{The indices of the items selected to maximize value.}
+#' @export
 greedy_knapsack <- function(x, W) {
   # Check for invalid input: W must be non-negative
   if (W < 0) {

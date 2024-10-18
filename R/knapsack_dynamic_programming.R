@@ -1,4 +1,15 @@
-
+#' Dynamic Programming Knapsack Solver
+#'
+#' Solves the knapsack problem using dynamic programming to find the optimal
+#' selection of items that maximize the value within the given weight capacity.
+#'
+#' @param x A data frame containing two columns: `v` (values) and `w` (weights).
+#' @param W A numeric value representing the maximum capacity (weight) of the knapsack.
+#'
+#' @return A list with the following components:
+#'   \item{max_value}{The maximum value that can be obtained.}
+#'   \item{selected_items}{The indices of the items selected to obtain the maximum value.}
+#' @export
 knapsack_dynamic_programming <- function(x, W) {
   stopifnot("v" %in% names(x) & "w" %in% names(x) & all(x$v > 0) & all(x$w > 0))
   n <- nrow(x)
