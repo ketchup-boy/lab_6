@@ -42,11 +42,11 @@ knapsack_objects <-
 #  l <- profvis({brute_force_knapsack(knapsack_objects, 4033)})
 #  l
 
-system.time({
- result <- brute_force_knapsack_general(knapsack_objects, 3300, FALSE)
-})
-
-system.time({
-result_parallel <- brute_force_knapsack_general(knapsack_objects, 3000, TRUE)
-})
+# system.time({
+#  result <- brute_force_knapsack_general(knapsack_objects, 3300, FALSE)
+# })
+# 
+# system.time({
+# result_parallel <- brute_force_knapsack_general(knapsack_objects, 3000, TRUE)
+# })
  #result <- brute_force_knapsack(knapsack_objects, 3000)
