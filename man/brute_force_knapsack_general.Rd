@@ -10,6 +10,8 @@ brute_force_knapsack_general(x, W, parallel)
 \item{x}{A data frame containing two columns: \code{v} (values) and \code{w} (weights) for each item.}
 
 \item{W}{A numeric value representing the maximum capacity (weight) of the knapsack.}
+
+\item{parallel}{A logical value indicating whether to enable parallel processing.}
 }
 \value{
 A list with the following components:
