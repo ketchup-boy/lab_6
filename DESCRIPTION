@@ -10,10 +10,10 @@ Description: More about what it does (maybe more than one line).
 License: What license is it under?
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.2
+Imports: parallel
 Suggests: 
     knitr,
     rmarkdown,
-    testthat (>= 3.0.0),
-    parallel
+    testthat (>= 3.0.0)
 Config/testthat/edition: 3
 VignetteBuilder: knitr
