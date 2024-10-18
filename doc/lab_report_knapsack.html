@@ -426,12 +426,11 @@ such that the total weight does not exceed <code>W</code>.</p>
 </div>
 <div id="solve-using-the-optimized-brute-force-method" class="section level2">
 <h2>Solve using the optimized brute force method</h2>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a></span>
-<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a>result <span class="ot">&lt;-</span> <span class="fu">brute_force_knapsack_optimized</span>(knapsack_objects[<span class="dv">1</span><span class="sc">:</span><span class="dv">8</span>,], <span class="at">W =</span> <span class="dv">3500</span>)</span>
-<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a><span class="fu">print</span>(result<span class="sc">$</span>max_value)</span>
-<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a><span class="co">#&gt; NULL</span></span>
-<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a><span class="fu">print</span>(result<span class="sc">$</span>selected_items)</span>
-<span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a><span class="co">#&gt; [1] 4 5 7</span></span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a>result <span class="ot">&lt;-</span> <span class="fu">brute_force_knapsack_optimized</span>(knapsack_objects[<span class="dv">1</span><span class="sc">:</span><span class="dv">8</span>,], <span class="at">W =</span> <span class="dv">3500</span>)</span>
+<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a><span class="fu">print</span>(result<span class="sc">$</span>max_value)</span>
+<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a><span class="co">#&gt; NULL</span></span>
+<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a><span class="fu">print</span>(result<span class="sc">$</span>selected_items)</span>
+<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a><span class="co">#&gt; [1] 4 5 7</span></span></code></pre></div>
 </div>
 <div id="solve-using-optimized-dynamic-programming-method" class="section level2">
 <h2>Solve using optimized dynamic programming method</h2>
@@ -464,44 +463,24 @@ such that the total weight does not exceed <code>W</code>.</p>
 <span id="cb8-6"><a href="#cb8-6" tabindex="-1"></a><span class="co">#&gt; NULL</span></span></code></pre></div>
 <p>Q&amp;A for required questions:</p>
 <p>brute_force: Question: How much time does it takes to run the
-algorithm for n = 16 objects? Answer:</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="co">#system.time({</span></span>
-<span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a> <span class="co"># result &lt;- brute_force_knapsack(knapsack_objects[1:16,], W = 3500)</span></span>
-<span id="cb9-3"><a href="#cb9-3" tabindex="-1"></a><span class="co">#})</span></span></code></pre></div>
+algorithm for n = 16 objects? Answer: Time elapsed is 0.41s</p>
 <p>knapsack_dynamic: Question: How much time does it takes to run the
-algorithm for n = 500 objects? Answer:</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a><span class="co">#system.time({</span></span>
-<span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a><span class="co">#  result &lt;- knapsack_dynamic_programming(knapsack_objects[1:500,], W = 3500)</span></span>
-<span id="cb10-3"><a href="#cb10-3" tabindex="-1"></a><span class="co">#})</span></span></code></pre></div>
+algorithm for n = 500 objects? Answer: Time elapsed is 2.99</p>
 <p>greedy_knapsack: Question: How much time does it takes to run the
 algorithm for n = 1000000 objects? Answer: The algorithm took
 approximately 0.49 seconds to run for n = 1,000,000 objects.</p>
 <p>PROFILING THE CODE: Question: What performance gain could you get by
 trying to improving your code?</p>
-<p>brute_force_knapsack_optimized:</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a><span class="co">#system.time({</span></span>
-<span id="cb11-2"><a href="#cb11-2" tabindex="-1"></a><span class="co">#brute_force_knapsack(knapsack_objects[1:16,], 3300)</span></span>
-<span id="cb11-3"><a href="#cb11-3" tabindex="-1"></a><span class="co">#})</span></span>
-<span id="cb11-4"><a href="#cb11-4" tabindex="-1"></a></span>
-<span id="cb11-5"><a href="#cb11-5" tabindex="-1"></a><span class="co">#system.time({</span></span>
-<span id="cb11-6"><a href="#cb11-6" tabindex="-1"></a><span class="co">#brute_force_knapsack_optimized(knapsack_objects[1:16,], 3000)</span></span>
-<span id="cb11-7"><a href="#cb11-7" tabindex="-1"></a><span class="co">#})</span></span></code></pre></div>
-<p>The gain can be very large (like exponentially better) when there are
-items that have a higher weight than the capacity. If not, the optimized
-code might actually run a bit slower because of the overhead code</p>
-<p>knapsack_dynamic_programming_optimized:</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a><span class="co">#system.time({</span></span>
-<span id="cb12-2"><a href="#cb12-2" tabindex="-1"></a><span class="co">#knapsack_dynamic_programming(knapsack_objects[1:600,], 3300)</span></span>
-<span id="cb12-3"><a href="#cb12-3" tabindex="-1"></a><span class="co">#})</span></span>
-<span id="cb12-4"><a href="#cb12-4" tabindex="-1"></a></span>
-<span id="cb12-5"><a href="#cb12-5" tabindex="-1"></a><span class="co">#system.time({</span></span>
-<span id="cb12-6"><a href="#cb12-6" tabindex="-1"></a><span class="co">#knapsack_dynamic_programming_optimized(knapsack_objects[1:600,], 3000)</span></span>
-<span id="cb12-7"><a href="#cb12-7" tabindex="-1"></a><span class="co">#})</span></span></code></pre></div>
-<p>Just like the optimized version of the brute force approach, the
-amount of improvement depends on how many items are at a larger weight
-than the capacity. However, the improvements in the dynamic version are
-by no means as drastic as the ones in the brute force version (which is
-to be expected since brute force has a much larger complexity)</p>
+<p>brute_force_knapsack_optimized: The gain can be very large (like
+exponentially better) when there are items that have a higher weight
+than the capacity. If not, the optimized code might actually run a bit
+slower because of the overhead code</p>
+<p>knapsack_dynamic_programming_optimized: Just like the optimized
+version of the brute force approach, the amount of improvement depends
+on how many items are at a larger weight than the capacity. However, the
+improvements in the dynamic version are by no means as drastic as the
+ones in the brute force version (which is to be expected since brute
+force has a much larger complexity)</p>
 <p>greedy_knapsack_optimized: By optimizing the greedy_knapsack
 function, you could achieve a ~30%–40% performance gain, depending on
 the size of the dataset and the system you’re running the function on.
@@ -510,18 +489,9 @@ element tracking — streamline the function’s performance, making it more
 efficient for large-scale computations.</p>
 <p>Parallelize brute force search: Question: What performance gain could
 you get by parallelizing brute force search?
-brute_force_knapsack_parallel:</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a><span class="co">#system.time({</span></span>
-<span id="cb13-2"><a href="#cb13-2" tabindex="-1"></a><span class="co"># result &lt;- brute_force_knapsack_general(knapsack_objects[1:17,], 3300, FALSE)</span></span>
-<span id="cb13-3"><a href="#cb13-3" tabindex="-1"></a><span class="co">#})</span></span>
-<span id="cb13-4"><a href="#cb13-4" tabindex="-1"></a></span>
-<span id="cb13-5"><a href="#cb13-5" tabindex="-1"></a><span class="co">#system.time({</span></span>
-<span id="cb13-6"><a href="#cb13-6" tabindex="-1"></a><span class="co">#result_parallel &lt;- brute_force_knapsack_general(knapsack_objects[1:17,], 3000, TRUE)</span></span>
-<span id="cb13-7"><a href="#cb13-7" tabindex="-1"></a><span class="co">#})</span></span></code></pre></div>
-<p>It does seem like the parallel runs faster in user time but much
-slower in elapsed time. It is probably due to the overhead computation
-that comes with parallel computing</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" tabindex="-1"></a><span class="fu">library</span>(lab6)</span></code></pre></div>
+brute_force_knapsack_parallel: It does seem like the parallel runs
+faster in user time but much slower in elapsed time. It is probably due
+to the overhead computation that comes with parallel computing</p>
 <p>###Conclusion This package offers multiple methods for solving the
 knapsack problem, from exact solutions to faster approximations.
 Depending on the problem size and requirements, users can choose the

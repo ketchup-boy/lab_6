@@ -74,7 +74,6 @@ print(result$elements)
 
 ## Solve using the optimized brute force method
 ```{r brute force opt}
-
 result <- brute_force_knapsack_optimized(knapsack_objects[1:8,], W = 3500)
 print(result$max_value)
 print(result$selected_items)
