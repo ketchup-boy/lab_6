@@ -3,6 +3,7 @@
 #' Solves the knapsack problem using a parallelized brute force approach or with non paralellalized brute force approach depending on inpur.
 #' @param x A data frame containing two columns: \code{v} (values) and \code{w} (weights) for each item.
 #' @param W A numeric value representing the maximum capacity (weight) of the knapsack.
+#' @param parallel A logical value indicating whether to enable parallel processing.
 #'
 #' @return A list with the following components:
 #'   \item{value}{The maximum value that can be obtained.}
