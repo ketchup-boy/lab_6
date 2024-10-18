@@ -9,7 +9,7 @@ vignette: >
 ---
 
 ```{r, include = FALSE}
-library(lab6)  # Assuming your package is named 'lab6'
+library(lab6)  
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
@@ -23,6 +23,10 @@ This package includes three different methods for solving the knapsack problem:
 1. **Brute Force Approach**: Checks all possible combinations of items to find the best solution.
 2. **Dynamic Programming Approach**: Uses a more efficient algorithm to solve the problem in a way that avoids checking every combination.
 3. **Greedy Approach**: Uses an approximation by choosing items based on their value-to-weight ratio, but does not guarantee the optimal solution.
+4. **optimized Brute Force Approach**: Improves the brute force method by pruning items that exceed the knapsack's capacity before evaluating all possible combinations, enhancing efficiency especially when there are many heavy items.
+5. **Optimized Dynamic Programming Approach**: Enhances the dynamic programming method by pruning items that exceed the knapsack's capacity and backtracking to efficiently find the optimal set of items
+6. **Optimized Greedy Approach**: Uses a more efficient greedy algorithm by tracking original item indices and preallocating space, while still selecting items based on their value-to-weight ratio to quickly approximate a solution.
+7. **Parallelized Brute Force Approach**: Splits the brute force process across multiple CPU cores using parallel processing, evaluating combinations of items in parallel to speed up the search for the optimal solution.
 
 ### Problem Formulation
 
@@ -34,7 +38,7 @@ The objective is to maximize the total value of the selected items such that the
 
 ### Example Usage:
 
-```{r}
+```{r setup}
 # Generate random items
 set.seed(42)
 n <- 2000
@@ -45,7 +49,7 @@ knapsack_objects <- data.frame(
 ```
 
 ## Solve using the brute force method
-```{r}
+```{r brute force}
 
 result <- brute_force_knapsack(knapsack_objects[1:8,], W = 3500)
 print(result$max_value)
@@ -53,22 +57,137 @@ print(result$selected_items)
 ```
 
 ## Solve using dynamic programming
-```{r}
+```{r dynamic}
 
-result <- knapsack_dynamic_programming(knapsack_objects[1:800,], W = 3500)
+result <- knapsack_dynamic_programming(knapsack_objects[1:500,], W = 3500)
 print(result$max_value)
 print(result$selected_items)
 ```
 
 ## Solve using the greedy method
-```{r}
+```{r greedy}
 
 result <- greedy_knapsack(knapsack_objects[1:1200,], W = 3500)
 print(result$value)
 print(result$elements)
 ```
 
-```{r setup}
+## Solve using the optimized brute force method
+```{r brute force opt}
+
+result <- brute_force_knapsack_optimized(knapsack_objects[1:8,], W = 3500)
+print(result$max_value)
+print(result$selected_items)
+```
+
+
+## Solve using optimized dynamic programming method
+```{r dynamic opt}
+
+result <- knapsack_dynamic_programming_optimized(knapsack_objects[1:500,], W = 3500)
+print(result$max_value)
+print(result$selected_items)
+```
+
+## Solve using the optimized greedy method
+```{r greedy opt}
+
+result <- greedy_knapsack_optimized(knapsack_objects[1:1200,], W = 3500)
+print(result$value)
+print(result$elements)
+```
+
+## Solve using the parallel brute force method
+```{r brute porce par}
+
+result <- brute_force_knapsack_general(knapsack_objects[1:8,], W = 3500, TRUE)
+print(result$max_value)
+print(result$selected_items)
+```
+
+Q&A for required questions:
+
+brute_force:
+Question: How much time does it takes to run the algorithm for n = 16 objects?
+Answer: 
+
+```{r brute force time}
+#system.time({
+ # result <- brute_force_knapsack(knapsack_objects[1:16,], W = 3500)
+#})
+```
+
+
+
+knapsack_dynamic:
+Question: How much time does it takes to run the algorithm for n = 500 objects?
+Answer: 
+
+```{r dynamic time}
+#system.time({
+#  result <- knapsack_dynamic_programming(knapsack_objects[1:500,], W = 3500)
+#})
+```
+
+greedy_knapsack: 
+Question: How much time does it takes to run the algorithm for n = 1000000 objects?
+Answer: The algorithm took approximately 0.49 seconds to run for n = 1,000,000 objects.
+
+PROFILING THE CODE:
+Question: What performance gain could you get by trying to improving your code?
+
+brute_force_knapsack_optimized: 
+
+```{r setup brute force opt vs regular}
+#system.time({
+#brute_force_knapsack(knapsack_objects[1:16,], 3300)
+#})
+
+#system.time({
+#brute_force_knapsack_optimized(knapsack_objects[1:16,], 3000)
+#})
+```
+
+The gain can be very large (like exponentially better) when there are items that have a higher weight than the capacity. If not, the optimized code might actually run a bit slower because of the overhead code
+
+knapsack_dynamic_programming_optimized:
+
+```{r dynamic opt vs regular}
+#system.time({
+#knapsack_dynamic_programming(knapsack_objects[1:600,], 3300)
+#})
+
+#system.time({
+#knapsack_dynamic_programming_optimized(knapsack_objects[1:600,], 3000)
+#})
+```
+
+Just like the optimized version of the brute force approach, the amount of improvement depends on how many items are at a larger weight than the capacity. However, the improvements in the dynamic version are by no means as drastic as the ones in the
+brute force version (which is to be expected since brute force has a much larger complexity)
+
+
+greedy_knapsack_optimized: By optimizing the greedy_knapsack function, you could achieve a ~30%–40% performance gain, depending on the size of the dataset and the system you're running the function on. The key optimizations — preallocating memory for vectors and efficient element tracking — streamline the function's performance, making it more efficient for large-scale computations.
+
+
+
+Parallelize brute force search:
+Question: What performance gain could you get by parallelizing brute force search?
+brute_force_knapsack_parallel:
+
+```{r prute force par vs regular}
+#system.time({
+# result <- brute_force_knapsack_general(knapsack_objects[1:17,], 3300, FALSE)
+#})
+
+#system.time({
+#result_parallel <- brute_force_knapsack_general(knapsack_objects[1:17,], 3000, TRUE)
+#})
+```
+
+It does seem like the parallel runs faster in user time but much slower in elapsed time.
+It is probably due to the overhead computation that comes with parallel computing
+
+```{r library}
 library(lab6)
 ```
 
