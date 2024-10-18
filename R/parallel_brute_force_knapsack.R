@@ -13,7 +13,7 @@ library(parallel)
 #'   \item{value}{The maximum value that can be obtained.}
 #'   \item{elements}{The indices of the items selected to obtain the maximum value.}
 #'   \item{weight}{The total weight of the selected items.}
-#'
+#' @import parallel
 #' @details
 #' This function evaluates all possible combinations of items using brute force, but to improve 
 #' performance, it evaluates chunks of combinations in parallel using the \code{parallel} package. 
