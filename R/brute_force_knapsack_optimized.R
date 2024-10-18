@@ -3,6 +3,7 @@ brute_force_knapsack_optimized <- function(x, W){
   #pruning away items that have a weight above the capacity mainly works 
   #when you have a lot of items above max capacity. Otherwise
   #it might even take longer time
+  x$original_index <- 1:length(x$v)
   x <- subset(x, w <= W)
   n <- length(x$v)
   current_max_weight <- 0
@@ -22,7 +23,8 @@ brute_force_knapsack_optimized <- function(x, W){
       }
     }
   }
-  return(list(value = current_best_value, elements = current_best_items, weight = current_max_weight))
+  
+  return(list(value = current_best_value, elements = x$original_index[current_best_items], weight = current_max_weight))
 }
 
 RNGversion(min(as.character(getRversion()),"3.5.3"))
@@ -35,9 +37,9 @@ knapsack_objects <-
     v=runif(n = n, 0, 10000)
   )
 
-#system.time({
- # result_optimized <- brute_force_knapsack_optimized(knapsack_objects, 3300)
-#})
+system.time({
+  result_optimized <- brute_force_knapsack_optimized(knapsack_objects, 3300)
+})
 
 #o <- profvis({brute_force_knapsack_optimized(knapsack_objects, 4033)})
 #o

@@ -1,31 +1,65 @@
 
 knapsack_dynamic_programming <- function(x, W) {
-  stopifnot("v" %in% names(x) & "w" %in% names(x) & all(x$v > 0) & all(x$w > 0))
+  # stopifnot("v" %in% names(x) & "w" %in% names(x) & all(x$v > 0) & all(x$w > 0))
+  # n <- nrow(x)
+  # dp <- matrix(0, nrow = n + 1, ncol = W + 1)
+  # 
+  # for (i in 2:(n+1)) {
+  #   for (w in 1:(W+1)) {
+  #     if (x$w[i-1] > w-1) {  # Compare current item's weight with current capacity
+  #       dp[i, w] <- dp[i-1, w]
+  #     } else {
+  #       dp[i, w] <- max(dp[i-1, w], dp[i-1, w - x$w[i-1]] + x$v[i-1])
+  #     }
+  #   }
+  # }
+  # 
+  # chosen_items <- c()
+  # remaining_capacity <- W
+  # for (i in n:1) {
+  #   if (dp[i + 1, remaining_capacity + 1] != dp[i, remaining_capacity + 1]) {
+  #     chosen_items <- c(i, chosen_items)  # Item i was chosen (1-based indexing)
+  #     remaining_capacity <- remaining_capacity - x$w[i]  # Update remaining capacity
+  #   }
+  # }
+  # 
+  # max_value <- dp[n + 1, W + 1]
+  # 
+  # return(list(max_value = max_value, chosen_items = chosen_items))
+  
+  
+  stopifnot("v" %in% names(x) & "w" %in% names(x) & all(x$v > 0) & all(x$w > 0) & (W >= 0))
   n <- nrow(x)
   dp <- matrix(0, nrow = n + 1, ncol = W + 1)
   
-  for (i in 2:(n+1)) {
-    for (w in 1:(W+1)) {
-      if (x$w[i-1] > w-1) {  # Compare current item's weight with current capacity
-        dp[i, w] <- dp[i-1, w]
+  # Fill DP table
+  for (i in 2:(n + 1)) {
+    for (w in 1:(W + 1)) {
+      if (x$w[i - 1] > w - 1) { 
+        dp[i, w] <- dp[i - 1, w]
       } else {
-        dp[i, w] <- max(dp[i-1, w], dp[i-1, w - x$w[i-1]] + x$v[i-1])
+        dp[i, w] <- max(dp[i - 1, w], dp[i - 1, w - x$w[i - 1]] + x$v[i - 1])
       }
     }
   }
   
-  chosen_items <- c()
+  # Backtrack to find which items were picked
+  selected_items <- c()
   remaining_capacity <- W
   for (i in n:1) {
+    if (remaining_capacity <= 0) {
+      break  # No remaining capacity to consider further items
+    }
     if (dp[i + 1, remaining_capacity + 1] != dp[i, remaining_capacity + 1]) {
-      chosen_items <- c(i, chosen_items)  # Item i was chosen (1-based indexing)
-      remaining_capacity <- remaining_capacity - x$w[i]  # Update remaining capacity
+      selected_items <- c(i, selected_items)  # Item i was chosen
+      remaining_capacity <- remaining_capacity - x$w[i]
     }
   }
   
   max_value <- dp[n + 1, W + 1]
   
-  return(list(max_value = max_value, chosen_items = chosen_items))
+  return(list(max_value = round(max_value), selected_items = selected_items))
+  
 }
 
 RNGversion(min(as.character(getRversion()),"3.5.3"))

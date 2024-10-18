@@ -1,31 +1,37 @@
 knapsack_dynamic_programming_optimized <- function(x, W) {
-  stopifnot("v" %in% names(x) & "w" %in% names(x) & all(x$v > 0) & all(x$w > 0))
+  stopifnot("v" %in% names(x) & "w" %in% names(x) & all(x$v > 0) & all(x$w > 0) & (W >= 0))
+  x$original_index <- 1:length(x$v)
   x <- subset(x, w <= W)
   n <- nrow(x)
   dp <- matrix(0, nrow = n + 1, ncol = W + 1)
   
-  for (i in 1:n) {
-    for (w in 0:W) {
-      if (x$w[i] <= w) {
-        dp[i + 1, w + 1] <- max(dp[i, w + 1], dp[i, w - x$w[i] + 1] + x$v[i])
+  # Fill DP table
+  for (i in 2:(n + 1)) {
+    for (w in 1:(W + 1)) {
+      if (x$w[i - 1] > w - 1) { 
+        dp[i, w] <- dp[i - 1, w]
       } else {
-        dp[i + 1, w + 1] <- dp[i, w + 1]
+        dp[i, w] <- max(dp[i - 1, w], dp[i - 1, w - x$w[i - 1]] + x$v[i - 1])
       }
+    }
+  }
+  
+  # Backtrack to find which items were picked
+  selected_items <- c()
+  remaining_capacity <- W
+  for (i in n:1) {
+    if (remaining_capacity <= 0) {
+      break  # No remaining capacity to consider further items
+    }
+    if (dp[i + 1, remaining_capacity + 1] != dp[i, remaining_capacity + 1]) {
+      selected_items <- c(i, selected_items)  # Item i was chosen
+      remaining_capacity <- remaining_capacity - x$w[i]
     }
   }
   
   max_value <- dp[n + 1, W + 1]
   
-  selected_items <- c()
-  remaining_capacity <- W
-  for (i in n:1) {
-    if (dp[i + 1, remaining_capacity + 1] != dp[i, remaining_capacity + 1]) {
-      selected_items <- c(selected_items, i)
-      remaining_capacity <- remaining_capacity - x$w[i]
-    }
-  }
-  
-  return(list(max_value = max_value, selected_items = selected_items))
+  return(list(max_value = round(max_value), selected_items = x$original_index[selected_items]))
 }
 
 RNGversion(min(as.character(getRversion()),"3.5.3"))
@@ -41,6 +47,6 @@ knapsack_objects <-
 #o <- profvis({dynamic_programming_knapsack_optimized(knapsack_objects, 4033)})
 #o
 
-#system.time({
- # result_optimized <- dynamic_programming_knapsack_optimized(knapsack_objects, 3300)
-#})
+system.time({
+ result_optimized <- knapsack_dynamic_programming_optimized(knapsack_objects, 3300)
+})
