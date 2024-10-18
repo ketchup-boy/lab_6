@@ -23,6 +23,10 @@ This package includes three different methods for solving the knapsack problem:
 1. **Brute Force Approach**: Checks all possible combinations of items to find the best solution.
 2. **Dynamic Programming Approach**: Uses a more efficient algorithm to solve the problem in a way that avoids checking every combination.
 3. **Greedy Approach**: Uses an approximation by choosing items based on their value-to-weight ratio, but does not guarantee the optimal solution.
+4. **optimized Brute Force Approach**: Improves the brute force method by pruning items that exceed the knapsack's capacity before evaluating all possible combinations, enhancing efficiency especially when there are many heavy items.
+5. **Optimized Dynamic Programming Approach**: Enhances the dynamic programming method by pruning items that exceed the knapsack's capacity and backtracking to efficiently find the optimal set of items
+6. **Optimized Greedy Approach**: Uses a more efficient greedy algorithm by tracking original item indices and preallocating space, while still selecting items based on their value-to-weight ratio to quickly approximate a solution.
+7. **Parallelized Brute Force Approach**: Splits the brute force process across multiple CPU cores using parallel processing, evaluating combinations of items in parallel to speed up the search for the optimal solution.
 
 ### Problem Formulation
 
@@ -55,7 +59,7 @@ print(result$selected_items)
 ## Solve using dynamic programming
 ```{r}
 
-result <- knapsack_dynamic_programming(knapsack_objects[1:800,], W = 3500)
+result <- knapsack_dynamic_programming(knapsack_objects[1:500,], W = 3500)
 print(result$max_value)
 print(result$selected_items)
 ```
@@ -67,6 +71,41 @@ result <- greedy_knapsack(knapsack_objects[1:1200,], W = 3500)
 print(result$value)
 print(result$elements)
 ```
+
+## Solve using the optimized brute force method
+```{r}
+
+result <- brute_force_knapsack_optimized(knapsack_objects[1:8,], W = 3500)
+print(result$max_value)
+print(result$selected_items)
+```
+
+
+## Solve using optimized dynamic programming method
+```{r}
+
+result <- knapsack_dynamic_programming_optimized(knapsack_objects[1:500,], W = 3500)
+print(result$max_value)
+print(result$selected_items)
+```
+
+## Solve using the optimized greedy method
+```{r}
+
+result <- greedy_knapsack_optimized(knapsack_objects[1:1200,], W = 3500)
+print(result$value)
+print(result$elements)
+```
+
+## Solve using the parallel brute force method
+```{r}
+
+result <- brute_force_knapsack_general(knapsack_objects[1:8,], W = 3500, TRUE)
+print(result$max_value)
+print(result$selected_items)
+```
+
+
 
 ```{r setup}
 library(lab6)

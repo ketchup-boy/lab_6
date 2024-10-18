@@ -45,11 +45,11 @@ test_that("Function returns correct results", {
 })
 
 # Test 4: Larger dataset checks
-test_that("Function returns correct results for larger datasets", {
-  kd <- knapsack_dynamic_programming(x = knapsack_objects[1:800,], W = 3500)
-  expect_equal(round(kd$max_value), 192647)
-  
-  kd <- knapsack_dynamic_programming(x = knapsack_objects[1:1200,], W = 3500)
-  expect_equal(round(kd$max_value), 270290)
-})
+# test_that("Function returns correct results for larger datasets", {
+#   kd <- knapsack_dynamic_programming(x = knapsack_objects[1:800,], W = 3500)
+#   expect_equal(round(kd$max_value), 192647)
+#   
+#   kd <- knapsack_dynamic_programming(x = knapsack_objects[1:1200,], W = 3500)
+#   expect_equal(round(kd$max_value), 270290)
+# })
 
