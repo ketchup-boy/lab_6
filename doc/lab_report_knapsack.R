@@ -49,9 +49,3 @@ result <- greedy_knapsack_optimized(knapsack_objects[1:1200,], W = 3500)
 print(result$value)
 print(result$elements)
 
-## ----brute porce par----------------------------------------------------------
-
-result <- brute_force_knapsack_general(knapsack_objects[1:8,], W = 3500, TRUE)
-print(result$max_value)
-print(result$selected_items)
-

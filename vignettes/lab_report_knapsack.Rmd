@@ -96,14 +96,6 @@ print(result$value)
 print(result$elements)
 ```
 
-## Solve using the parallel brute force method
-```{r brute porce par}
-
-result <- brute_force_knapsack_general(knapsack_objects[1:8,], W = 3500, TRUE)
-print(result$max_value)
-print(result$selected_items)
-```
-
 Q&A for required questions:
 
 brute_force:

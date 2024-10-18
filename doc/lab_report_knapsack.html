@@ -452,15 +452,6 @@ such that the total weight does not exceed <code>W</code>.</p>
 <span id="cb7-6"><a href="#cb7-6" tabindex="-1"></a><span class="co">#&gt;  [1]  256  530 1186  951  701 1157  973  559 1019   89   75  759  845 1153  626</span></span>
 <span id="cb7-7"><a href="#cb7-7" tabindex="-1"></a><span class="co">#&gt; [16]  897 1106  219 1065 1070  244 1036   63  672  455  826  764  981  329   77</span></span>
 <span id="cb7-8"><a href="#cb7-8" tabindex="-1"></a><span class="co">#&gt; [31]  705  320  110 1068 1119  509  762  729 1080  691  283  553</span></span></code></pre></div>
-</div>
-<div id="solve-using-the-parallel-brute-force-method" class="section level2">
-<h2>Solve using the parallel brute force method</h2>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a></span>
-<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a>result <span class="ot">&lt;-</span> <span class="fu">brute_force_knapsack_general</span>(knapsack_objects[<span class="dv">1</span><span class="sc">:</span><span class="dv">8</span>,], <span class="at">W =</span> <span class="dv">3500</span>, <span class="cn">TRUE</span>)</span>
-<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a><span class="fu">print</span>(result<span class="sc">$</span>max_value)</span>
-<span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a><span class="co">#&gt; NULL</span></span>
-<span id="cb8-5"><a href="#cb8-5" tabindex="-1"></a><span class="fu">print</span>(result<span class="sc">$</span>selected_items)</span>
-<span id="cb8-6"><a href="#cb8-6" tabindex="-1"></a><span class="co">#&gt; NULL</span></span></code></pre></div>
 <p>Q&amp;A for required questions:</p>
 <p>brute_force: Question: How much time does it takes to run the
 algorithm for n = 16 objects? Answer: Time elapsed is 0.41s</p>
