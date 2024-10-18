@@ -3,6 +3,9 @@ brute_force_knapsack_optimized <- function(x, W){
   #pruning away items that have a weight above the capacity mainly works 
   #when you have a lot of items above max capacity. Otherwise
   #it might even take longer time
+  #my approach takes a little bit more memory since i now added a column of the original indexes of the list. This 
+  #could have been made in a better way but it seemed like the simpelest for now
+  x$original_index <- 1:length(x$v)
   x <- subset(x, w <= W)
   n <- length(x$v)
   current_max_weight <- 0
@@ -22,7 +25,8 @@ brute_force_knapsack_optimized <- function(x, W){
       }
     }
   }
-  return(list(value = current_best_value, elements = current_best_items, weight = current_max_weight))
+  
+  return(list(value = current_best_value, selected_items = x$original_index[current_best_items], weight = current_max_weight))
 }
 
 RNGversion(min(as.character(getRversion()),"3.5.3"))
