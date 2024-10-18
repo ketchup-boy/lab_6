@@ -1,6 +1,6 @@
 
 knapsack_dynamic_programming <- function(x, W) {
-  stopifnot("v" %in% names(x) & "w" %in% names(x) & all(x$v > 0) & all(x$w > 0))
+  stopifnot("v" %in% names(x) & "w" %in% names(x) & all(x$v > 0) & all(x$w > 0) & (W >= 0))
   n <- nrow(x)
   dp <- matrix(0, nrow = n + 1, ncol = W + 1)
   
