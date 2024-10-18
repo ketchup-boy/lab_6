@@ -109,25 +109,11 @@ Q&A for required questions:
 
 brute_force:
 Question: How much time does it takes to run the algorithm for n = 16 objects?
-Answer: 
-
-```{r brute force time}
-#system.time({
- # result <- brute_force_knapsack(knapsack_objects[1:16,], W = 3500)
-#})
-```
-
-
+Answer: Time elapsed is 0.41s
 
 knapsack_dynamic:
 Question: How much time does it takes to run the algorithm for n = 500 objects?
-Answer: 
-
-```{r dynamic time}
-#system.time({
-#  result <- knapsack_dynamic_programming(knapsack_objects[1:500,], W = 3500)
-#})
-```
+Answer: Time elapsed is 2.99
 
 greedy_knapsack: 
 Question: How much time does it takes to run the algorithm for n = 1000000 objects?
@@ -137,33 +123,10 @@ PROFILING THE CODE:
 Question: What performance gain could you get by trying to improving your code?
 
 brute_force_knapsack_optimized: 
-
-```{r setup brute force opt vs regular}
-#system.time({
-#brute_force_knapsack(knapsack_objects[1:16,], 3300)
-#})
-
-#system.time({
-#brute_force_knapsack_optimized(knapsack_objects[1:16,], 3000)
-#})
-```
-
 The gain can be very large (like exponentially better) when there are items that have a higher weight than the capacity. If not, the optimized code might actually run a bit slower because of the overhead code
 
 knapsack_dynamic_programming_optimized:
-
-```{r dynamic opt vs regular}
-#system.time({
-#knapsack_dynamic_programming(knapsack_objects[1:600,], 3300)
-#})
-
-#system.time({
-#knapsack_dynamic_programming_optimized(knapsack_objects[1:600,], 3000)
-#})
-```
-
-Just like the optimized version of the brute force approach, the amount of improvement depends on how many items are at a larger weight than the capacity. However, the improvements in the dynamic version are by no means as drastic as the ones in the
-brute force version (which is to be expected since brute force has a much larger complexity)
+Just like the optimized version of the brute force approach, the amount of improvement depends on how many items are at a larger weight than the capacity. However, the improvements in the dynamic version are by no means as drastic as the ones in the brute force version (which is to be expected since brute force has a much larger complexity)
 
 
 greedy_knapsack_optimized: By optimizing the greedy_knapsack function, you could achieve a ~30%–40% performance gain, depending on the size of the dataset and the system you're running the function on. The key optimizations — preallocating memory for vectors and efficient element tracking — streamline the function's performance, making it more efficient for large-scale computations.
@@ -173,20 +136,8 @@ greedy_knapsack_optimized: By optimizing the greedy_knapsack function, you could
 Parallelize brute force search:
 Question: What performance gain could you get by parallelizing brute force search?
 brute_force_knapsack_parallel:
-
-```{r prute force par vs regular}
-#system.time({
-# result <- brute_force_knapsack_general(knapsack_objects[1:17,], 3300, FALSE)
-#})
-
-#system.time({
-#result_parallel <- brute_force_knapsack_general(knapsack_objects[1:17,], 3000, TRUE)
-#})
-```
-
 It does seem like the parallel runs faster in user time but much slower in elapsed time.
 It is probably due to the overhead computation that comes with parallel computing
-
 
 ###Conclusion
 This package offers multiple methods for solving the knapsack problem, from exact solutions to faster approximations. Depending on the problem size and requirements, users can choose the appropriate method to find the optimal or near-optimal solution
